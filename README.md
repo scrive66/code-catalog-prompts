@@ -18,6 +18,7 @@
 | [audit-code-deviations](prompts/audit-code-deviations.prompt.md) | カタログの「確立した作法」と実コードを突き合わせ、チェックの不在＝バグ候補を監査し `docs/deviation-audit.md` を出す |
 | [convert-catalog-to-instructions](prompts/convert-catalog-to-instructions.prompt.md) | カタログで `[採用]` 印を付けた項目だけを、根拠コメント付きの instructions 下書きに変換する |
 | [interview-tacit-knowledge](prompts/interview-tacit-knowledge.prompt.md) | コードから読めない暗黙知だけを最大7問（選択肢つき）で聞き取り、ルール案と例外リストに整形する |
+| [generate-reuse-index](prompts/generate-reuse-index.prompt.md) | 再利用可能な部品（関数・クラス・モジュール）を棚卸しし、シグネチャ・利用実例・再利用グレード付きの目録 `docs/reuse-index.md`（＋JSON版）を生成する。「書く前に見る」ための台帳で、instructions 用スニペットも出力する |
 
 ## Skills
 
@@ -60,6 +61,13 @@ VS Code 拡張「Awesome Copilot」等の awesome-copilot 互換ツールから�
    - 本物のバグだった → 修正し、カタログの作法として確定
    - 意図的だった → 理由をカタログの「登録済み例外」に追記（次回監査で除外される）
 6. コードベースが育ったら 1 を再実行してカタログを更新する（差分確認を推奨）
+
+### 部品の再利用まで広げる場合
+
+作法（カタログ）とは別に、部品そのものの再利用には **`/generate-reuse-index`** を使う。
+生成された `docs/reuse-index.md` と、出力される instructions 用スニペットを
+プロジェクトの instructions に貼ると、「新規実装の前に目録を見る」が常時ルールになる。
+目録とカタログは独立に再生成してよい（目録=部品の棚、カタログ=作法の棚）。
 
 ## 設計上の約束（全プロンプト共通）
 
